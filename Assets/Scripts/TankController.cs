@@ -6,13 +6,13 @@ public class TankController : MonoBehaviour
 
     public float maxSpeed = 5f;
 
-    public float maxTurnSpeedBody = 30f;
+    public float maxTurnSpeedBody = 5f;
 
-    public float maxTurnSpeedTower = 10f;
+    public float maxTurnSpeedTower = 5f;
 
-    public float maxTurnSpeedTurret = 10f;
+    public float maxTurnSpeedTurret = 5f;
 
-    public float deadZoneTower = 0f;
+    public float deadZoneTower = 1f;
     
     private float horAxis;
 
@@ -116,8 +116,6 @@ public class TankController : MonoBehaviour
 
         // Корректируем положение пушки в зависимости от положения камеры
         var turretPitch = Vector3.Dot(transform.GetChild(0).GetChild(0).forward, transform.GetChild(0).transform.up);
-
-        Debug.Log(projection + " | " + turretPitch);
 
         if ((projection * 100 > 1 * deadZoneTower) && (turretPitch > -0.2f))
                 
