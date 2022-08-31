@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MainCameraFollow : MonoBehaviour
@@ -9,15 +7,9 @@ public class MainCameraFollow : MonoBehaviour
 
     public GameObject anchor3rdPerson;
 
-    public GameObject turret;
-
     public GameObject cameraTarget;
 
-    public Camera mainCamera;
-
     public float cameraOffsetFloating = 100f;
-
-    public float mouseSensitivity = 100;
 
     private Vector3 localPosCamera;
 
@@ -33,8 +25,6 @@ public class MainCameraFollow : MonoBehaviour
 
     void Start()
     {
-        Camera.SetupCurrent(mainCamera);
-
         localPosCamera = anchor1stPerson.transform.InverseTransformPoint(anchor3rdPerson.transform.position);
     }
 
@@ -42,14 +32,17 @@ public class MainCameraFollow : MonoBehaviour
     {
         CameraModeChange();
 
-        CameraMove();
-
         TargetRotate();
     }
 
     void LateUpdate()
-    {
+    {        
+        
+    }
 
+    void FixedUpdate()
+    {
+        CameraMove();
     }
 
     void CameraModeChange()
