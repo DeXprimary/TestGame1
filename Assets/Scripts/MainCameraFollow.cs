@@ -58,12 +58,14 @@ public class MainCameraFollow : MonoBehaviour
 
         if (mouseWheel != 0)
         {
+            // Меняем режим от 1 лица если камера 3 лица близко
             cameraDistanceOffset = Mathf.Clamp(cameraDistanceOffset + mouseWheel, 0, 0.8f);
-            
+                        
             if (cameraDistanceOffset > 0.7) { is1stPersoncamera = true; }
 
             else { is1stPersoncamera = false; }
 
+            // При вращении колеса мыши тащим камеру вдоль оси между дальним видом от 3 лица и видом от 1 лица
             var directionOffsetVector = anchor1stPerson.transform.position - anchor3rdPerson.transform.position;
 
             directionOffsetVector = directionOffsetVector * cameraDistanceOffset;
@@ -76,6 +78,7 @@ public class MainCameraFollow : MonoBehaviour
 
     void CameraMove()
     {
+        // Двигаем камеру плавно или твёрдо за целью камеры в зависимости от текущего режима вида
         if (is1stPersoncamera)
         {
             var newPosition = anchor1stPerson.transform.TransformPoint(localPosCamera * 0.8f);
@@ -96,6 +99,7 @@ public class MainCameraFollow : MonoBehaviour
 
     void TargetRotate()
     {
+        // Двигаем цель камеры по осям движения мыши
         mouseAxisX += Input.GetAxis("Mouse X");
 
         mouseAxisY -= Input.GetAxis("Mouse Y");
