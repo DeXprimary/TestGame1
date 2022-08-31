@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using System.Diagnostics;
 using TMPro;
 using UnityEngine;
 
@@ -7,17 +7,25 @@ public class Shell : MonoBehaviour
 {
     private float shellSpeed = 10f;
 
+    private TimeSpan maxLifeTime = TimeSpan.FromSeconds(1);
+
+    private Stopwatch lifeTimer = new Stopwatch();
+
     // Start is called before the first frame update
     void Start()
     {
         // Задаем начальный импульс снаряда
-        GetComponent<Rigidbody>().AddForce(transform.forward * shellSpeed * 50, ForceMode.Impulse);
+        GetComponent<Rigidbody>().AddForce(transform.forward * shellSpeed * 200, ForceMode.Impulse);
+
+        // Запускаем счётчик времени жизни снаряда
+        lifeTimer.Start();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        // Если снаряд живёт дольше maxLifeTime, то удаляем его
+        if (lifeTimer.ElapsedMilliseconds > maxLifeTime.TotalMilliseconds) Destroy(gameObject);
     }
     
     private void OnCollisionEnter(Collision collision)
