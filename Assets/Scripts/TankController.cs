@@ -48,6 +48,7 @@ public class TankController : MonoBehaviour
 
     void Shoot()
     {
+        // При клике ЛКМ совершаем выстрел создавая объект снаряда 
         GameObject shell = GameObject.CreatePrimitive(PrimitiveType.Sphere);
 
         shell.transform.localScale = new Vector3(0.1f, 0.1f, 1f);
